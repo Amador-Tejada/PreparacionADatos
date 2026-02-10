@@ -1,0 +1,69 @@
+-- =========================================
+-- LIMPIEZA PREVIA (opcional)
+-- =========================================
+DROP TABLE IF EXISTS PEDIDOS;
+DROP TABLE IF EXISTS COMPRADOR;
+
+-- =========================================
+-- TABLA COMPRADOR
+-- =========================================
+CREATE TABLE COMPRADOR (
+    ID INT NOT NULL AUTO_INCREMENT,
+    NOMBRE VARCHAR(255),
+    DIRECCION VARCHAR(255),
+    TELEFONO VARCHAR(20),
+    CORREO VARCHAR(255),
+    CIUDAD VARCHAR(255),
+    PRIMARY KEY (ID)
+) ENGINE=InnoDB;
+
+-- =========================================
+-- TABLA PEDIDOS
+-- =========================================
+CREATE TABLE PEDIDOS (
+    ID INT NOT NULL AUTO_INCREMENT,
+    NOMBRE VARCHAR(255),
+    FECHA DATE,
+    PRECIO DOUBLE,
+    CANTIDAD INT,
+    ESTADO VARCHAR(50),
+    COMPRADOR_ID INT,
+    PRIMARY KEY (ID),
+    INDEX idx_comprador_id (COMPRADOR_ID),
+    CONSTRAINT fk_pedidos_comprador
+        FOREIGN KEY (COMPRADOR_ID)
+        REFERENCES COMPRADOR(ID)
+        ON DELETE CASCADE
+) ENGINE=InnoDB;
+
+-- =========================================
+-- INSERTAR COMPRADORES (10)
+-- =========================================
+INSERT INTO COMPRADOR (NOMBRE, DIRECCION, TELEFONO, CORREO, CIUDAD) VALUES
+('Juan Perez',      'Calle Mayor 10',        '612345678', 'juan.perez@gmail.com',      'Madrid'),
+('Ana Lopez',       'Avenida Sol 25',        '623456789', 'ana.lopez@hotmail.com',     'Barcelona'),
+('Carlos Gomez',    'Calle Luna 7',          '634567890', 'carlos.gomez@yahoo.com',    'Valencia'),
+('Maria Sanchez',   'Plaza España 3',        '645678901', 'maria.sanchez@gmail.com',   'Sevilla'),
+('Luis Martinez',   'Calle Norte 15',        '656789012', 'luis.martinez@gmail.com',   'Bilbao'),
+('Laura Fernandez', 'Avenida Sur 42',        '667890123', 'laura.fernandez@gmail.com', 'Zaragoza'),
+('Pedro Ruiz',      'Calle Central 8',       '678901234', 'pedro.ruiz@hotmail.com',    'Murcia'),
+('Elena Torres',    'Paseo Maritimo 1',      '689012345', 'elena.torres@gmail.com',    'Malaga'),
+('Javier Moreno',   'Calle Olivo 19',        '690123456', 'javier.moreno@yahoo.com',   'Granada'),
+('Sofia Navarro',   'Avenida Libertad 55',   '691234567', 'sofia.navarro@gmail.com',   'Alicante');
+
+-- =========================================
+-- INSERTAR PEDIDOS (10) RELACIONADOS
+-- =========================================
+INSERT INTO PEDIDOS (NOMBRE, FECHA, PRECIO, CANTIDAD, ESTADO, COMPRADOR_ID) VALUES
+('Pedido Portatil',    '2024-01-10', 850.50, 1, 'PENDIENTE', 1),
+('Pedido Monitor',     '2024-01-12', 220.00, 2, 'ENVIADO',   1),
+('Pedido Teclado',     '2024-01-15', 35.99,  3, 'ENTREGADO', 2),
+('Pedido Raton',       '2024-01-18', 19.99,  5, 'ENTREGADO', 2),
+('Pedido Impresora',   '2024-01-20', 150.00, 1, 'CANCELADO', 3),
+('Pedido Escritorio',  '2024-01-22', 120.75, 2, 'PENDIENTE', 4),
+('Pedido Silla',       '2024-01-25', 89.90,  4, 'ENVIADO',   5),
+('Pedido Tablet',      '2024-01-28', 310.00, 1, 'ENTREGADO', 6),
+('Pedido Movil',       '2024-02-01', 699.99, 1, 'PENDIENTE', 7),
+('Pedido Auriculares', '2024-02-03', 59.95,  2, 'ENVIADO',   8);
+
+

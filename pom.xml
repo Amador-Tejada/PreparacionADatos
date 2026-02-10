@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.example</groupId>
+    <artifactId>PracticaCRUDhibernate</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <!-- Ajustado a Java 25, que está instalado en el sistema -->
+        <maven.compiler.source>25</maven.compiler.source>
+        <maven.compiler.target>25</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <!--
+                     HIBERNATE CORE 6.x
+                     Esta es la librería principal. Usamos la versión 6+ porque vuestras clases
+                     tienen 'import jakarta.persistence.*'. Si usarais 'javax', esta versión fallaría.
+                 -->
+        <dependency>
+            <groupId>org.hibernate.orm</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>7.0.4.Final</version>
+        </dependency>
+        <!--
+                     DRIVER DE BASE DE DATOS (MySQL)
+                     Necesario para que Java sepa "hablar" con el servidor MySQL.
+                     Si usáis PostgreSQL, cambiad esto por la dependencia 'org.postgresql:postgresql'.
+                 -->
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <version>8.3.0</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version>
+                <configuration>
+                    <!-- Usar 'release' garantiza compatibilidad de API con Java 21 -->
+                    <release>21</release>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
